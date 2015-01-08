@@ -42,3 +42,26 @@ remote_file ::File.join(Chef::Config[:file_cache_path], node[:go][:filename]) do
   checksum node[:go][:checksum]
   notifies :run, 'execute[install-golang]', :immediately
 end
+
+directory node['go']['gopath'] do
+  action :create
+  recursive true
+  owner node['go']['owner']
+  group node['go']['group']
+  mode 0755
+end
+
+directory node['go']['gobin'] do
+  action :create
+  recursive true
+  owner node['go']['owner']
+  group node['go']['group']
+  mode 0755
+end
+
+template "/etc/profile.d/golang.sh" do
+  source "golang.sh.erb"
+  owner 'root'
+  group 'root'
+  mode 0755
+end
