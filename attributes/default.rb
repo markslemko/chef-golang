@@ -29,3 +29,5 @@ default[:go][:platform] = platforms.fetch(node[:kernel][:machine], '386')
 default[:go][:install_dir] = '/usr/local'
 default[:go][:cleanup] = false
 default[:go][:owner] = 'root'
+default[:go][:gopath] = '/opt/go'
+default[:go][:gobin] = '/opt/go/bin'
